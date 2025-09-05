@@ -1,58 +1,32 @@
 import React from 'react';
-import { Users, Gauge, MapPin, Star, Sparkles } from 'lucide-react';
-
+import { Users, Gauge, MapPin, Star } from 'lucide-react';
+import CountUp from '../Extra/CountUp';
+//Images
+import Logo from '../Images/Logos/Logo.svg'
+import A320 from '../Images/Planes/A320Fleet.png'
+import B757 from '../Images/Planes/Fleet.png'
 const Fleet = () => {
   const aircraft = [
-    {
-      name: 'Airbus A350',
-      type: 'Wide-body',
-      capacity: '324 passengers',
-      range: '15,000 km',
-      speed: '903 km/h',
-      image: 'https://images.pexels.com/photos/2026324/pexels-photo-2026324.jpeg?auto=compress&cs=tinysrgb&w=800',
-      description: 'The crown jewel of modern aviation - sleek, efficient, and designed for the ultimate passenger experience.',
-      vintage: false
-    },
-    {
-      name: 'Boeing 777',
-      type: 'Wide-body',
-      capacity: '396 passengers',
-      range: '14,800 km',
-      speed: '905 km/h',
-      image: 'https://images.pexels.com/photos/2026324/pexels-photo-2026324.jpeg?auto=compress&cs=tinysrgb&w=800',
-      description: 'The reliable giant of the skies - trusted by millions for intercontinental adventures.',
-      vintage: false
-    },
     {
       name: 'Airbus A320',
       type: 'Narrow-body',
       capacity: '180 passengers',
-      range: '6,100 km',
-      speed: '828 km/h',
-      image: 'https://images.pexels.com/photos/358319/pexels-photo-358319.jpeg?auto=compress&cs=tinysrgb&w=800',
-      description: 'The perfect companion for European escapes and medium-distance journeys.',
+      range: 'Whereever',
+      speed: '450',
+      image: A320,  
+      description: 'A  modern, popular, single-aisle commercial jet airliner manufactured by Airbus',
       vintage: false
     },
     {
-      name: 'Boeing 787 Dreamliner',
-      type: 'Wide-body',
-      capacity: '296 passengers',
-      range: '14,800 km',
-      speed: '903 km/h',
-      image: 'https://images.pexels.com/photos/2026324/pexels-photo-2026324.jpeg?auto=compress&cs=tinysrgb&w=800',
-      description: 'Where dreams take flight - revolutionary design meets unparalleled comfort.',
-      vintage: false
+      name: 'Boeing 757',
+      type: 'Narrow Body',
+      capacity: '295 passengers',
+      range: 'Whereever',
+      speed: '490',
+      image: B757,
+      description: 'American twin-engine, single-aisle jet airliner designed to replace the Boeing 727',
+      vintage: true
     },
-    {
-      name: 'Airbus A220',
-      type: 'Narrow-body',
-      capacity: '149 passengers',
-      range: '6,400 km',
-      speed: '828 km/h',
-      image: 'https://images.pexels.com/photos/358319/pexels-photo-358319.jpeg?auto=compress&cs=tinysrgb&w=800',
-      description: 'The future of aviation - eco-friendly innovation with a touch of elegance.',
-      vintage: false
-    }
   ];
 
   return (
@@ -61,28 +35,49 @@ const Fleet = () => {
         {/* Header */}
         <div className="text-center mb-16">
           <div className="flex justify-center mb-6">
-            <Sparkles className="h-12 w-12 text-amber-400 animate-pulse" />
+            <img src = {Logo} className="h-12 w-12 text-amber-400 animate-pulse" />
           </div>
-          <h1 className="text-6xl font-bold text-amber-400 mb-8 font-serif">Our Magnificent Fleet</h1>
+          <h1 className="text-6xl font-bold text-amber-400 mb-8 font-serif">Allegiant's Fleet</h1>
           <p className="text-2xl text-gray-300 max-w-4xl mx-auto leading-relaxed font-light">
-            Discover our carefully curated collection of aircraft, each one a masterpiece of engineering 
-            designed to carry you through the skies in comfort and style.
+            Discover our fleet which has crossed the seas day on ends, being the most reliable 
+            fleet in Project Flight
           </p>
         </div>
 
         {/* Fleet Statistics */}
         <div className="grid md:grid-cols-3 gap-8 mb-20 bg-gradient-to-r from-gray-800 to-gray-700 rounded-3xl p-12 border border-amber-400/20">
-          <div className="text-center">
-            <div className="text-5xl font-bold text-amber-400 mb-4 font-serif">300+</div>
-            <div className="text-gray-300 font-medium text-xl">Total Aircraft</div>
+          <div className=" text-2xl font-bold text-amber-400 mb-4 font-serif text-center">
+            <CountUp
+              from={0}
+              to={10}
+              separator=","
+              direction="up"
+              duration={1}
+             className="count-up-text text-6xl font-bold text-amber-400 mb-4 font-serif"
+            />minutes or less 
+            <div className="text-gray-300 font-medium text-xl">Turnaround Time</div>
           </div>
           <div className="text-center">
-            <div className="text-5xl font-bold text-amber-400 mb-4 font-serif">12</div>
+            <CountUp
+              from={0}
+              to={2}
+              separator=","
+              direction="up"
+              duration={1}
+             className="count-up-text text-6xl font-bold text-amber-400 mb-4 font-serif"
+            />
             <div className="text-gray-300 font-medium text-xl">Aircraft Types</div>
           </div>
-          <div className="text-center">
-            <div className="text-5xl font-bold text-amber-400 mb-4 font-serif">5.2</div>
-            <div className="text-gray-300 font-medium text-xl">Average Fleet Age (years)</div>
+          <div className="text-center text-4xl font-bold text-amber-400 mb-4 font-serif">
+              <CountUp
+              from={0}
+              to={100}
+              separator=","
+              direction="up"
+              duration={1}
+             className="count-up-text text-6xl font-bold text-amber-400 mb-4 font-serif"
+            />%
+            <div className="text-gray-300 font-medium text-xl">Reliability</div>
           </div>
         </div>
 
@@ -130,7 +125,7 @@ const Fleet = () => {
                   <div className="flex items-center space-x-3 bg-gray-700 p-4 rounded-xl">
                     <Gauge className="h-6 w-6 text-amber-400" />
                     <div>
-                      <div className="text-sm text-gray-400">Speed</div>
+                      <div className="text-sm text-gray-400">Speed(knots)</div>
                       <div className="font-bold text-amber-400">{plane.speed}</div>
                     </div>
                   </div>
@@ -144,32 +139,17 @@ const Fleet = () => {
         <div className="mt-24 bg-gradient-to-r from-gray-800 to-gray-700 rounded-3xl p-12 lg:p-16 border border-amber-400/20">
           <div className="text-center">
             <div className="flex justify-center mb-8">
-              <Star className="h-16 w-16 text-amber-400 fill-current" />
+              <img src = {Logo} className="h-16 w-16 text-amber-400 fill-current" />
             </div>
-            <h2 className="text-4xl font-bold text-amber-400 mb-8 font-serif">Flying Towards Tomorrow</h2>
+            <h2 className="text-4xl font-bold text-blue-700 mb-8 font-serif">Validation</h2>
             <p className="text-xl text-gray-300 max-w-5xl mx-auto leading-relaxed mb-12 font-light">
-              Our commitment to the environment runs as deep as our passion for flight. Every aircraft in our fleet 
-              represents a step towards a more sustainable future, combining cutting-edge technology with 
-              environmental responsibility.
+              Everything recorded in this fleet page is unrealistic and is calculating every plane in the 
+              game, Project Flight. 
             </p>
-            <div className="grid md:grid-cols-3 gap-8 max-w-5xl mx-auto">
-              <div className="bg-gray-900 rounded-2xl p-8 shadow-2xl border border-amber-400/30">
-                <div className="text-4xl font-bold text-amber-400 mb-4 font-serif">-25%</div>
-                <div className="text-gray-300 text-lg">CO₂ Emissions Reduction</div>
-              </div>
-              <div className="bg-gray-900 rounded-2xl p-8 shadow-2xl border border-amber-400/30">
-                <div className="text-4xl font-bold text-amber-400 mb-4 font-serif">-30%</div>
-                <div className="text-gray-300 text-lg">Fuel Consumption</div>
-              </div>
-              <div className="bg-gray-900 rounded-2xl p-8 shadow-2xl border border-amber-400/30">
-                <div className="text-4xl font-bold text-amber-400 mb-4 font-serif">100%</div>
-                <div className="text-gray-300 text-lg">Sustainable Aviation Fuel Ready</div>
-              </div>
             </div>
           </div>
         </div>
       </div>
-    </div>
   );
 };
 

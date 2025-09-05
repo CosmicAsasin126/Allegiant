@@ -1,86 +1,58 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { Plane, Menu, X, Star } from 'lucide-react';
+import { Plane } from 'lucide-react';
+//Images
+import Logo from '../Images/Logos/WhiteText.svg'
 
-const Navigation = () => {
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
+interface LayoutProps {
+  children: React.ReactNode;
+}
+
+const Navigation: React.FC<LayoutProps> = ({ children }) => {
   const location = useLocation();
 
   const navItems = [
-    { path: '/', label: 'Home' },
-    { path: '/fleet', label: 'Fleet' },
-    { path: '/destinations', label: 'Destinations' },
-    { path: '/reviews', label: 'Reviews' },
+    { name: 'Home', path: '/' },
+    { name: 'Fleet', path: '/fleet' },
+    { name: 'Destinations', path: '/destinations' },
   ];
 
-  const isActive = (path: string) => location.pathname === path;
-
   return (
-    <nav className="bg-gray-900 shadow-2xl relative z-50 border-b-2 border-amber-400">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex justify-between items-center h-20">
-          {/* Logo */}
-          <Link to="/" className="flex items-center space-x-2">
-            <div className="bg-gradient-to-r from-amber-400 to-orange-500 p-3 rounded-full shadow-lg">
-              <Plane className="h-8 w-8 text-gray-900" />
-            </div>
-            <div className="flex items-center space-x-1">
-              <span className="text-3xl font-bold text-amber-400 font-serif">Air France</span>
-              <Star className="h-4 w-4 text-amber-400 fill-current" />
-            </div>
-          </Link>
-
-          {/* Desktop Navigation */}
-          <div className="hidden md:flex space-x-2">
-            {navItems.map((item) => (
-              <Link
-                key={item.path}
-                to={item.path}
-                className={`px-6 py-3 rounded-full text-lg font-medium transition-all duration-300 transform hover:scale-105 ${
-                  isActive(item.path)
-                    ? 'text-gray-900 bg-amber-400 shadow-lg font-bold'
-                    : 'text-amber-100 hover:text-gray-900 hover:bg-amber-400 hover:shadow-lg'
-                }`}
-              >
-                {item.label}
-              </Link>
-            ))}
-          </div>
-
-          {/* Mobile menu button */}
-          <div className="md:hidden">
-            <button
-              onClick={() => setIsMenuOpen(!isMenuOpen)}
-              className="text-amber-400 hover:text-amber-300 p-2"
-            >
-              {isMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
-            </button>
+<div>
+      <header className="fixed top-0 left-0 right-0 z-50">
+        <div className="flex justify-center pt-2">
+          <div className="flex items-center bg-slate-900/90 backdrop-blur-md rounded-full px-8 py-4 border border-slate-700/50 shadow-2xl">
+            <Link to="/" className="flex items-center space-x-3 group mr-8">
+              <div className="w-32 h-8  rounded-full flex items-center justify-center group-hover:scale-105 transition-transform">
+                <img src = {Logo} className="w-32 h-32 text-white" />
+              </div>
+            </Link>
+            
+            <nav className="flex items-center space-x-1">
+              {navItems.map((item) => {
+                const isActive = location.pathname === item.path;
+                return (
+                  <Link
+                    key={item.name}
+                    to={item.path}
+                    className={`px-6 py-2 rounded-full text-sm font-medium transition-all duration-200 ${
+                      isActive
+                        ? 'bg-blue-700 text-white shadow-lg'
+                        : 'text-gray-300 hover:text-white hover:bg-slate-800/50'
+                    }`}
+                  >
+                    {item.name}
+                  </Link>
+                );
+              })}
+            </nav>
           </div>
         </div>
-
-        {/* Mobile Navigation */}
-        {isMenuOpen && (
-          <div className="md:hidden absolute top-20 left-0 right-0 bg-gray-800 shadow-2xl border-t border-amber-400">
-            <div className="px-2 pt-2 pb-3 space-y-1">
-              {navItems.map((item) => (
-                <Link
-                  key={item.path}
-                  to={item.path}
-                  onClick={() => setIsMenuOpen(false)}
-                  className={`block px-4 py-3 rounded-lg text-lg font-medium transition-all duration-300 ${
-                    isActive(item.path)
-                      ? 'text-gray-900 bg-amber-400 font-bold'
-                      : 'text-amber-100 hover:text-gray-900 hover:bg-amber-400'
-                  }`}
-                >
-                  {item.label}
-                </Link>
-              ))}
-            </div>
-          </div>
-        )}
-      </div>
-    </nav>
+      </header>
+      <main>
+        {children}
+      </main>
+    </div>
   );
 };
 
